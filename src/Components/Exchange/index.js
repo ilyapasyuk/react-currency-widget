@@ -2,7 +2,8 @@ import React, { useContext } from 'react'
 import { StateContext } from '../App'
 import styled from 'styled-components'
 import CurrencyInput from '../CurrencyInput'
-import { SET_CURRENCY } from '../../Actions/exchange'
+import { EXCHANGE, POCKETS } from '../../Constants/pocketFields'
+import { SET_FROM, SET_TO } from '../../Actions/exchange'
 
 const ExchangeWrapper = styled.div`
   width: 600px;
@@ -16,12 +17,22 @@ const ExchangeWrapper = styled.div`
 
 const Exchange = () => {
   const { state, dispatch } = useContext(StateContext)
-  console.log('state', state)
+  const isExchangeDisabled =
+    !Boolean(Object.values(state[EXCHANGE.TO])) || !Boolean(Object.values(state[EXCHANGE.FROM]))
+
   return (
     <ExchangeWrapper>
-      <CurrencyInput />
-      <CurrencyInput />
-      <button>Exchange</button>
+      <CurrencyInput
+        pockets={state[POCKETS]}
+        placeholder="From"
+        onChange={value => dispatch({ type: SET_FROM, value })}
+      />
+      <CurrencyInput
+        pockets={state[POCKETS]}
+        placeholder="To"
+        onChange={value => dispatch({ type: SET_TO, value })}
+      />
+      <button disabled={isExchangeDisabled}>Exchange</button>
     </ExchangeWrapper>
   )
 }

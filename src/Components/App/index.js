@@ -1,7 +1,14 @@
 import React, { useEffect, useReducer, createContext } from 'react'
 import { getRates } from '../../Services/getRates'
 import { stateReducer } from '../../Reducers/state'
-import { CURRENCY, POCKET, RATES } from '../../Constants/pocketFields'
+import {
+  CURRENCY,
+  POCKETS,
+  RATES,
+  BALANCE,
+  CURRENCY_NAME,
+  EXCHANGE,
+} from '../../Constants/pocketFields'
 import { SET_RATES } from '../../Actions/exchange'
 import Exchange from '../../Components/Exchange'
 import styled from 'styled-components'
@@ -15,12 +22,23 @@ const AppContainer = styled.div`
 `
 
 const initialState = {
-  [POCKET]: {
-    [CURRENCY.USD]: 1000,
-    [CURRENCY.GBP]: 0,
-    [CURRENCY.EUR]: 0,
-  },
-  [RATES]: null,
+  [POCKETS]: [
+    {
+      [CURRENCY_NAME]: CURRENCY.USD,
+      [BALANCE]: 1000.29,
+    },
+    {
+      [CURRENCY_NAME]: CURRENCY.GBP,
+      [BALANCE]: 100.35,
+    },
+    {
+      [CURRENCY_NAME]: CURRENCY.EUR,
+      [BALANCE]: 117.09,
+    },
+  ],
+  [RATES]: [],
+  [EXCHANGE.FROM]: {},
+  [EXCHANGE.TO]: {},
 }
 
 export const StateContext = createContext(initialState)

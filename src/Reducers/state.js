@@ -1,5 +1,5 @@
-import { SET_RATES } from '../Actions/exchange'
-import { RATES } from '../Constants/pocketFields'
+import { SET_FROM, SET_RATES, SET_TO } from '../Actions/exchange'
+import { EXCHANGE, RATES } from '../Constants/pocketFields'
 
 export function stateReducer(state, action) {
   switch (action.type) {
@@ -7,6 +7,17 @@ export function stateReducer(state, action) {
       return {
         ...state,
         [RATES]: action[RATES],
+      }
+    case SET_FROM:
+      return {
+        ...state,
+        [EXCHANGE.FROM]: action.value,
+      }
+
+    case SET_TO:
+      return {
+        ...state,
+        [EXCHANGE.TO]: action.value,
       }
     default:
       return state
