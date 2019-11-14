@@ -37,8 +37,14 @@ const initialState = {
     },
   ],
   [RATES]: [],
-  [EXCHANGE.FROM]: {},
-  [EXCHANGE.TO]: {},
+  [EXCHANGE.FROM]: {
+    [CURRENCY_NAME]: CURRENCY.USD,
+    value: 0,
+  },
+  [EXCHANGE.TO]: {
+    [CURRENCY_NAME]: CURRENCY.GBP,
+    value: 0,
+  },
 }
 
 export const StateContext = createContext(initialState)
